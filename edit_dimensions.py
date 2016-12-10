@@ -113,6 +113,7 @@ def register():
 
 def unregister():
     unregister_class(SetDimensions)
+    bpy.types.VIEW3D_MT_transform.remove(add_button)
 
 
 if __name__ == "__main__":

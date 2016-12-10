@@ -79,9 +79,9 @@ class SetDimensions(Operator):
     bl_options = {'REGISTER', 'UNDO'}
     bl_context = "editmode"
 
-    new_x = FloatProperty(name="X", min=0, default=1)
-    new_y = FloatProperty(name="Y", min=0, default=1)
-    new_z = FloatProperty(name="Z", min=0, default=1)
+    new_x = FloatProperty(name="X", min=0, default=1, unit='LENGTH')
+    new_y = FloatProperty(name="Y", min=0, default=1, unit='LENGTH')
+    new_z = FloatProperty(name="Z", min=0, default=1, unit='LENGTH')
 
     def invoke(self, context, event):
         bounds = calc_bounds()

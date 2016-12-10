@@ -66,11 +66,18 @@ def calc_bounds():
     return bounds
 
 
+def safe_divide(a, b):
+    if b != 0:
+        return a / b
+    return 1
+
+
 class SetDimensions(Operator):
     bl_label = "Set Dimensions"
     bl_idname = "mesh_tools_addon.set_dimensions"
     bl_description = "Sets dimensions of selected vertices"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_context = "editmode"
 
     new_x = FloatProperty(name="X", min=0, default=1)
     new_y = FloatProperty(name="Y", min=0, default=1)
@@ -85,9 +92,10 @@ class SetDimensions(Operator):
 
     def execute(self, context):
         bounds = calc_bounds()
-        x = self.new_x / (bounds[0] - bounds[1])
-        y = self.new_y / (bounds[2] - bounds[3])
-        z = self.new_z / (bounds[4] - bounds[5])
+        bpy.ops.object.mode_set(mode='EDIT')
+        x = safe_divide(self.new_x, (bounds[0] - bounds[1]))
+        y = safe_divide(self.new_y, (bounds[2] - bounds[3]))
+        z = safe_divide(self.new_z, (bounds[4] - bounds[5]))
         bpy.ops.transform.resize(value=(x, y, z))
 
         return {'FINISHED'}

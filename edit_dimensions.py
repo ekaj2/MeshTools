@@ -74,7 +74,7 @@ def safe_divide(a, b):
 
 class SetDimensions(Operator):
     bl_label = "Set Dimensions"
-    bl_idname = "mesh_tools_addon.set_dimensions"
+    bl_idname = "view3d.set_dimensions_mt"
     bl_description = "Sets dimensions of selected vertices"
     bl_options = {'REGISTER', 'UNDO'}
     bl_context = "editmode"
